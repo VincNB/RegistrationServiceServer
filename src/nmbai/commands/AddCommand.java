@@ -4,15 +4,14 @@ import nmbai.controls.CommandExecutor;
 
 public class AddCommand extends Command {
     public AddCommand() {
-        super("add", "add points to account");
+        super("add",0, "add points to account");
     }
 
     @Override
     public void execute(CommandExecutor executor) {
-        if (parameters.size() == 0) {
+        if(parameterCheck(executor))
+        {
             executor.add();
-        } else {
-            executor.output("add command takes no parameters");
         }
     }
 

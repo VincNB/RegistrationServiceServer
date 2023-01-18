@@ -4,7 +4,7 @@ import nmbai.controls.CommandExecutor;
 
 public class LoginCommand extends Command {
     public LoginCommand() {
-        super("login", "[username] [password] logs in to specified account");
+        super("login", 2, "[username] [password] logs in to specified account");
     }
 
     @Override
@@ -14,10 +14,8 @@ public class LoginCommand extends Command {
 
     @Override
     public void execute(CommandExecutor executor) {
-        if (parameters.size() == 2) {
+        if (parameterCheck(executor)) {
             executor.login(parameters.get(0), parameters.get(1));
-        } else {
-            executor.output("login command takes two parameters");
         }
     }
 }

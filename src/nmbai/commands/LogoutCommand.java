@@ -4,7 +4,7 @@ import nmbai.controls.CommandExecutor;
 
 public class LogoutCommand extends Command {
     public LogoutCommand() {
-        super("logout", "logs out account");
+        super("logout", 0, "logs out account");
     }
 
     @Override
@@ -14,10 +14,9 @@ public class LogoutCommand extends Command {
 
     @Override
     public void execute(CommandExecutor executor) {
-        if (parameters.size() == 0) {
+        if (parameterCheck(executor)) {
             executor.logout();
-        } else {
-            executor.output("logout command takes no parameters");
         }
+
     }
 }

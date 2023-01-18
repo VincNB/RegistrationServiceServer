@@ -11,7 +11,7 @@ public class CommandWords {
     private static final String COMMAND_FORMAT = "[%s] - [%s]%n";
     private final Map<String, Command> commands = new HashMap<>();
 
-    private final Command INVALID_COMMAND = new Command("", "") {
+    private final Command INVALID_COMMAND = new Command("", 0, "") {
         @Override
         public void execute(CommandExecutor executor) {
             executor.output("Command is not recognized.");

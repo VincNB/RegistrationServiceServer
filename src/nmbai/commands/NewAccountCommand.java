@@ -4,15 +4,13 @@ import nmbai.controls.CommandExecutor;
 
 public class NewAccountCommand extends Command {
     public NewAccountCommand() {
-        super("new", "[username] [password] creates a new account with username and password");
+        super("new", 2, "[username] [password] creates a new account with username and password");
     }
 
     @Override
     public void execute(CommandExecutor executor) {
-        if (parameters.size() == 2) {
+        if (parameterCheck(executor)) {
             executor.newAccount(parameters.get(0), parameters.get(1));
-        } else {
-            executor.output("new command takes two parameters");
         }
     }
 

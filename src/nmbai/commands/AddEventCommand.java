@@ -4,15 +4,13 @@ import nmbai.controls.CommandExecutor;
 
 public class AddEventCommand extends Command {
     public AddEventCommand() {
-        super("addEvent", "adds a new event to the server");
+        super("addevent", 3, "[event name] [event cost] [event capacity] to add a new RegistrationEvent");
     }
 
     @Override
     public void execute(CommandExecutor executor) {
-        if (parameters.size() == 3) {
+        if (parameterCheck(executor)) {
             executor.addEvent(parameters.get(0), parameters.get(1), parameters.get(2));
-        } else {
-            executor.output("addEvent command takes 2 parameters");
         }
     }
 

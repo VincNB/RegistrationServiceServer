@@ -4,15 +4,13 @@ import nmbai.controls.CommandExecutor;
 
 public class AccountCommand extends Command {
     public AccountCommand() {
-        super("account", "display account information");
+        super("account", 0, "display account information");
     }
 
     @Override
     public void execute(CommandExecutor executor) {
-        if (parameters.size() == 0) {
+        if (parameterCheck(executor)) {
             executor.displayAccount();
-        } else {
-            executor.output("account command takes no parameters");
         }
     }
 
