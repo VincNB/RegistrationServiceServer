@@ -6,10 +6,7 @@ import nmbai.commands.Command;
 import nmbai.controls.CommandExecutor;
 import nmbai.controls.Parser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
@@ -50,7 +47,6 @@ public class ServerConnection implements Runnable {
         if (nextLine == null) {
             nextLine = "";
         }
-        Logger.INSTANCE.log("Input:" + nextLine);
         return nextLine;
     }
 
@@ -68,7 +64,7 @@ public class ServerConnection implements Runnable {
     private boolean setup() {
         boolean success = true;
         try {
-            executor.setSocketOutput(new PrintWriter(socket.getOutputStream(), true));
+            executor.setOutput(new PrintStream(socket.getOutputStream()));
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();

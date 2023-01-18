@@ -21,6 +21,10 @@ public class Parser {
                 new ExitCommand(), new LogoutCommand(), new RegisterEventCommand()
         });
         stateMap.put(ExecutorState.LOGGED_IN, words);
+        words = new CommandWords(new Command[]{
+                new EventsCommand(), new NewAccountCommand(), new AddEventCommand()
+        });
+        stateMap.put(ExecutorState.SERVER_CONTROLLER, words);
     }
 
     public Command parseCommand(String input) {

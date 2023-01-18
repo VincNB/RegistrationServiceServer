@@ -1,6 +1,8 @@
 package nmbai.main;
 
 import nmbai.accounts.AccountManager;
+import nmbai.controls.CommandExecutor;
+import nmbai.controls.ServerController;
 import nmbai.registrationevents.RegistrationEventManager;
 import nmbai.network.Server;
 import nmbai.network.ServerAction;
@@ -23,13 +25,11 @@ public class Driver {
 
     public void start() {
         running = true;
-      //  registrationEventManager.newEvent("test_event", 10, 10);
-      //  registrationEventManager.newEvent("test_event2", 100, 5);
-        for (int i = 0; i < 0; i++) {
-            accountManager.newAccount("username" + i, "password");
-        }
         Thread serverThread = new Thread(server);
         serverThread.start();
+        CommandExecutor controllerExecutor = CommandExecutor.getInstance(this.accountManager, this.registrationEventManager);
+        Thread controllerThread = new Thread(new ServerController(controllerExecutor, this.actions));
+        controllerThread.start();
     }
 
     public void run() {

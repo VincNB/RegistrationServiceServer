@@ -12,7 +12,6 @@ public class RegistrationEventManager {
     private final RegistrationEventFile file = new RegistrationEventFile();
     private int nextId = 1_000; //initial value is completely arbitrary
     //every event should have a completely unique id forever, used in saving and loading file
-    private int bank;
 
     private RegistrationEventManager() {
     }
@@ -25,19 +24,12 @@ public class RegistrationEventManager {
 
     public boolean newEvent(String eventName, int cost, int capacity) {
         boolean success = false;
-        Objects.requireNonNull(eventName);
-        if (cost < 0) {
-            throw new IllegalArgumentException("cost must be non-negative integer");
-        }
-        if (capacity < 0) {
-            throw new IllegalArgumentException("capacity must be non-negative integer");
-        }
-        if (!stringEventMap.containsKey(eventName)) {
+        if (cost >= 0 && capacity >= 0 && !stringEventMap.containsKey(eventName)) {
             RegistrationEvent event = new RegistrationEvent(nextId++, eventName, cost, capacity);
             stringEventMap.put(eventName, event);
             intEventMap.put(event.getId(), event);
-            success = true;
             writeFile();
+            success = true;
         }
         return success;
     }

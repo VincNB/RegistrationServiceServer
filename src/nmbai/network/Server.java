@@ -34,9 +34,8 @@ public class Server implements Runnable {
         ExecutorService pool = Executors.newCachedThreadPool();
         while (running) {
             Socket socket = connect();
-            if (socket != null)
-            {
-                CommandExecutor executor = new CommandExecutor(this.accountManager, this.registrationEventManager);
+            if (socket != null) {
+                CommandExecutor executor = CommandExecutor.getInstance(this.accountManager, this.registrationEventManager);
                 ServerConnection connection = new ServerConnection(executor, socket, actions);
                 pool.submit(connection);
             }
